@@ -38,23 +38,360 @@
     <meta name="twitter:image" content="http://imgfz.com/i/KeuCVHl.png" />
 
     <!--CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Lista de Supermercado</title>
   </head>
   <body>
-    <header>
+    <header class="container-fluid">
       <h1>Lista de Supermercado</h1>
     </header>
-
-    <section>
-      <p>
-        lista de super publicada en firebase y en github pages con github
-        desktop
-      </p>
-      <p>actualizado</p>
+    <section class="container">
+      <div class="row pantalla">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <section id="lista">
+            <ol class="list-group list-group-numbered">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">Subheading</div>
+                  <p>Breve descripcion</p>
+                </div>
+                <i class="fa-solid fa-circle-chevron-right"></i>
+              </li>
+            </ol>
+          </section>
+          <div class="position-relative">
+            <div class="position-absolute top-50 end-0 translate-middle-y">
+              <div class="float-end">
+                <button
+                  type="button"
+                  id="btnSumar"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  class="btn btn-warning btn-personalizado"
+                >
+                  <i class="fa-solid fa-circle-plus"></i>
+                </button>
+              </div>
+              <!-- Button trigger modal -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 pantalla"></div>
+      </div>
     </section>
 
-    <footer></footer>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        id="liveToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="2000"
+        data-bs-autohide="true"
+      >
+        <div class="toast-header">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <strong class="me-auto">ToDoSuper</strong>
+          <small id="tiempoToast">En este momento</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body" id="toast-text">
+          Tu producto de <span id="productoAgregado"></span> se agregó
+          satisfactoriamente.
+        </div>
+      </div>
+    </div>
+    <!-- Full screen modal -->
+    <div class="modal-dialog modal-fullscreen-sm-down"></div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Agregar nuevo producto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary btn-lg dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="dropDownIcons"
+              >
+                <i class="fa-solid fa-kitchen-set"></i> Elegí el tipo de
+                producto
+              </button>
+              <ul class="dropdown-menu" id="dropDownLista">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion1"
+                    onClick="guardarValorClickeado(this.id)"
+                  >
+                    <i class="fa-solid fa-apple-whole"></i> Frutas
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="opcion2"
+                    onClick="guardarValorClickeado(this.id)"
+                  >
+                    <i class="fa-solid fa-spray-can-sparkles"></i> Perfumeria
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion3"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-bandage"></i> Farmacia
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion4"
+                    onClick="guardarValorClickeado(this.id)"
+                  >
+                    <i class="fa-solid fa-screwdriver"></i> Herramientas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion5"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-bath"></i> Higiene</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion6"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-bone"></i> Mascotas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion7"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-bottle-water"></i> Bebidas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion8"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-brush"></i> Pintura</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion9"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-utensils"></i> Bazar</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion10"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-carrot"></i> Verduras</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion11"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-desktop"></i> Tecnología</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion12"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-dice-d20"></i> Juegos de mesa</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion13"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-stapler"></i> Libreria</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion14"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-trowel"></i> Jardineria</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    id="opcion15"
+                    onClick="guardarValorClickeado(this.id)"
+                    ><i class="fa-solid fa-campground"></i> Camping</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="liveToastBtn"
+              data-bs-dismiss="modal"
+            >
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <p>esto es un copy re piola - 2022</p>
+          </div>
+          <div class="col-md-2"><p>rrss</p></div>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/2f04e7de65.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="js/script.js"></script>
   </body>
 </html>

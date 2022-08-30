@@ -1,4 +1,27 @@
 body {
-  color: white;
   background-color: rgb(19, 19, 66);
+}
+
+header {
+  color: white;
+  background-color: rgb(73, 73, 245);
+}
+
+.pantalla {
+  height: 90vh;
+}
+
+.btn .btn-warning .btn-personalizado {
+  max-height: 10%;
+}
+
+footer {
+  color: white;
+  background-color: rgb(73, 73, 245);
+  text-align: center;
+}
+
+.fa-solid,
+.fas {
+  font-size: 1.5em;
 }
