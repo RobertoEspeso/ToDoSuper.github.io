@@ -60,7 +60,7 @@ header .fa-cart-shopping {
 }
 .btnAbrirPopup,
 .fa-circle-plus {
-  font-size: 2.5em !important;
+  font-size: 2em !important;
   --bs-btn-active-bg: none;
   --bs-btn-hover-bg: none;
   --bs-btn-focus-shadow-rgb: none;
@@ -70,7 +70,7 @@ header .fa-cart-shopping {
 }
 .btnAbrirPopup:hover,
 .fa-circle-plus:hover {
-  font-size: 2.5em !important;
+  font-size: 2em !important;
   color: var(--colorSecunario);
   --bs-btn-active-bg: none;
   --bs-btn-hover-bg: none;
@@ -200,6 +200,23 @@ header .fa-cart-shopping {
   color: var(--colorDetalles);
 }
 
+.textosVerMas {
+  text-overflow: Ellipsis;
+  max-width: 127px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.contenedorTextoDeLista {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.listaConItems .borrarItem {
+  margin-right: 20px;
+  font-size: 1.8em;
+  color: var(--colorDetalles);
+}
+
 /*----------------------TOAST - CARTEL DE ESTADO---------------------------------*/
 .toast-header .fa-cart-shopping {
   font-size: 1em;
@@ -214,7 +231,31 @@ footer {
   text-align: center;
   height: 80px;
 }
+footer .row {
+  padding: 0.8em 0;
+}
+.copy p {
+  margin: 1em 0;
+}
+.copy a {
+  text-decoration: none;
+  color: var(--colorDetalles);
+  font-weight: bold;
+}
 
+.copy a:hover {
+  color: var(--colorPrimario);
+}
+
+.rrss a {
+  text-decoration: none;
+  color: var(--colorDetalles);
+  font-size: 2em;
+}
+
+.rrss a:hover {
+  color: var(--colorPrimario);
+}
 /*----------------------MEDIAQUERYS---------------------------------*/
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
@@ -228,5 +269,15 @@ footer {
   }
   .listaVacia .caraBase {
     font-size: 5em;
+  }
+  footer .row {
+    padding: 0;
+  }
+  .copy p {
+    margin: 0.8em 0;
+    font-size: 0.8em;
+  }
+  .rrss a {
+    font-size: 1.5em;
   }
 }
