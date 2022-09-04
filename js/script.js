@@ -17,8 +17,8 @@ function agregarProductoALista() {
   let descripcionDeProducto = document.getElementById(
     "descripcionDelUsuario"
   ).value;
-  var textoIcono = document.getElementById("textoIcono");
-  let itemDeLista = document.getElementById("itemDeLista");
+  /*  var textoIcono = document.getElementById("textoIcono");
+  let itemDeLista = document.getElementById("itemDeLista"); */
   let templateItemAgregado = `
   <li class="list-group-item d-flex justify-content-between align-items-center">
   <a href="#" onClick="borrarItem(this.id)" ${idBorrarEnCrecimiento()}><i class="fa-solid fa-rectangle-xmark borrarItem"></i></a>
