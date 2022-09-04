@@ -2,6 +2,8 @@ let crecimiento = 0;
 let crecimientoTexto = 0;
 let crecimientoDetalle = 0;
 let crecimientoBorrar = 0;
+var listaVacia = document.getElementById("listaVacia");
+var listaConItems = document.getElementById("listaConItems");
 const dropDownIconsBase = " Elegí el tipo de producto*";
 const dropDownsBase = document.getElementById("opcionBase");
 const btnAgregarProductoALista = document.getElementById(
@@ -17,8 +19,6 @@ function agregarProductoALista() {
   let descripcionDeProducto = document.getElementById(
     "descripcionDelUsuario"
   ).value;
-  /*  var textoIcono = document.getElementById("textoIcono");
-  let itemDeLista = document.getElementById("itemDeLista"); */
   let templateItemAgregado = `
   <li class="list-group-item d-flex justify-content-between align-items-center">
   <a href="#" onClick="borrarItem(this.id)" ${idBorrarEnCrecimiento()}><i class="fa-solid fa-rectangle-xmark borrarItem"></i></a>
@@ -38,8 +38,6 @@ function agregarProductoALista() {
   contenedorProductos.innerHTML += templateItemAgregado;
 
   function listaVaciaListaLLena() {
-    var listaVacia = document.getElementById("listaVacia");
-    var listaConItems = document.getElementById("listaConItems");
     listaVacia.classList.remove("seVe");
     listaVacia.classList.add("noSeVe");
     listaConItems.classList.remove("noSeVe");
@@ -165,6 +163,15 @@ function borrarItem(clicked_id) {
     confirmacionPrompt === "Si"
   ) {
     elementoPadre.remove();
+    console.log(contenedorProductos);
+    if (contenedorProductos.firstElementChild === null) {
+      listaConItems.classList.remove("seVe");
+      listaConItems.classList.add("noSeVe");
+      listaVacia.classList.remove("noSeVe");
+      listaVacia.classList.add("seVe");
+    } else {
+      console.log("Tiene hijos");
+    }
   } else {
     alert("Te achicaste pichon.");
   }
