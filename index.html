@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <!--JONYYYY te dejo entonces mi cartita, falta:
+      1- hacer la pantalla de detalle
+      2- validacion de datos del formulario (ok)
+      2- que se me resetee el formulario despues de agregar el primer item (ok)
+      3- mediaquerys (ok)
+      4- metas /icon (ok)
+      5- maquetado de footer
+      6- borrar productos cuando ya los compre
+      7- hora de creacion de producto
+      8- guardar en local storage-->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="" type="image/x-icon" />
-    <meta name="description" content="Primer reto del Winterhack 2022" />
+    <link rel="shortcut icon" href="images/icon.jpg" type="image/x-icon" />
+    <meta name="title" content="ToDoSuper - Tú app para hacer las compras" />
+    <meta name="description" content="Tercer reto del Winterhack 2022" />
     <meta
       name="keywords"
-      content="Mago de oz, finisterra, folkmetal, bandas españolas, la danza del fuego"
+      content="javascrips, html5, css, flexbox, boostrap5, todolist, lista de compras supermercado, toDoSuper"
     />
     <meta name="author" content="Espeso Roberto" />
     <meta name="copyright" content="Espeso Roberto 2022" />
@@ -17,25 +28,28 @@
     <meta name="robots" content="index follow" />
 
     <!--Facebook-->
-    <meta property="og:title" content="Primer reto del Winterhack 2022" />
+    <meta property="og:title" content="Tercer reto del Winterhack 2022" />
     <meta
       property="og:description"
-      content="Primer reto del Winterhack sobre HTML5 con meta tags para twitter, facebook y schema, el reto es sobre una canción de una banda a elección, colocando los datos del artista, album, canción, letra y un reproductor para que sea escuchada."
+      content="Tercer reto del Winterhack  y primero con Javascript, la consigna es realizar un to do list de un supermercado, que se vea una pantalla sin productos, otra con productos, que tenga un sistema de agregado de productos y que se pueda ver el detalle de cada producto en otra pantalla."
     />
     <meta property="og:type" content="Reto Semanal" />
-    <meta property="og:image" content="http://imgfz.com/i/KeuCVHl.png" />
-    <meta property="og:url" content="firebase.com" />
+    <meta property="og:image" content="http://imgfz.com/i/6oJygXl.jpeg" />
+    <meta
+      property="og:url"
+      content="https://github.com/RobertoEspeso/ToDoSuper-Winterhack.github.io"
+    />
 
     <!--Twitter-->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@magodeoz" />
+    <meta name="twitter:site" content="@SoloLoki" />
     <meta name="twitter:creator" content="@SoloLoki" />
-    <meta name="twitter:title" content="Primer reto del Winterhack 2022" />
+    <meta name="twitter:title" content="Tercer reto del Winterhack 2022" />
     <meta
       name="twitter:description"
-      content="Primer reto del Winterhack sobre HTML5 con meta tags para twitter, facebook y schema, el reto es sobre una canción de una banda a elección, colocando los datos del artista, album, canción, letra y un reproductor para que sea escuchada."
+      content="Tercer reto del Winterhack  y primero con Javascript, la consigna es realizar un to do list de un supermercado, que se vea una pantalla sin productos, otra con productos, que tenga un sistema de agregado de productos y que se pueda ver el detalle de cada producto en otra pantalla."
     />
-    <meta name="twitter:image" content="http://imgfz.com/i/KeuCVHl.png" />
+    <meta name="twitter:image" content="http://imgfz.com/i/6oJygXl.jpeg" />
 
     <!--CSS-->
     <link
@@ -44,102 +58,88 @@
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Lista de Supermercado</title>
+    <title>ToDoSuper</title>
   </head>
   <body>
-    <header class="container-fluid">
-      <h1>Lista de Supermercado</h1>
+    <header class="container-fluid d-flex">
+      <h1 class="d-flex align-items-center align-content-center">
+        <i class="fa-solid fa-cart-shopping"></i> <strong>ToDoSuper</strong>
+      </h1>
     </header>
-    <section class="container">
-      <div class="row pantalla">
+    <section class="container d-flex flex-column contenedorGeneral">
+      <div class="row">
+        <!-- Button trigger modal -->
+        <div class="position-relative">
+          <div class="position-fixed top-50 end-0 translate-middle-y">
+            <div class="float-end">
+              <button
+                type="button"
+                id="btnSumar"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                class="btn btn-warning btn-personalizado btnAbrirPopup"
+              >
+                <i class="fa-solid fa-circle-plus"></i>
+              </button>
+            </div>
+            <!-- Button trigger modal -->
+          </div>
+        </div>
+        <!-- Button trigger modal -->
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <section id="lista">
-            <ol class="list-group list-group-numbered">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
+            <div class="col-md-12 listaVacia seVe center" id="listaVacia">
+              <div class="row">
+                <div class="col-md-2">
+                  <i class="fa-solid fa-quote-left quotes"></i>
                 </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
+                <div class="col-md-8">
+                  <h2>No tenes cosas para comprar en el super</h2>
                 </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
+                <div class="col-md-2">
+                  <i class="fa-solid fa-quote-right quotes"></i>
                 </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
-                </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
-                </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
-                </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-start"
-              >
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold">Subheading</div>
-                  <p>Breve descripcion</p>
-                </div>
-                <i class="fa-solid fa-circle-chevron-right"></i>
-              </li>
-            </ol>
-          </section>
-          <div class="position-relative">
-            <div class="position-absolute top-50 end-0 translate-middle-y">
-              <div class="float-end">
-                <button
-                  type="button"
-                  id="btnSumar"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  class="btn btn-warning btn-personalizado"
-                >
-                  <i class="fa-solid fa-circle-plus"></i>
-                </button>
               </div>
-              <!-- Button trigger modal -->
+              <i class="fa-regular fa-face-laugh-beam caraBase"></i>
+              <h5>
+                Podes agregar cosas para tu próxima visita al super presionando
+                el botón +
+              </h5>
             </div>
-          </div>
+            <div class="col-md-12 listaConItems noSeVe" id="listaConItems">
+              <ul class="list-group list-group" id="contenedorProductos">
+                <!--
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  <div class="ms-2 me-auto d-flex itemLista">
+                    <i class="fa-solid fa-kitchen-set iconoItemLista"></i>
+                    <div>
+                      <div class="fw-bold">Subheading</div>
+                      <p>Breve descripcion</p>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalDetalleProductos"
+                    ><i class="fa-solid fa-circle-chevron-right"></i
+                  ></a>
+                </li>
+                -->
+              </ul>
+            </div>
+          </section>
         </div>
-        <div class="col-md-2 pantalla"></div>
+        <div class="col-md-2"></div>
       </div>
     </section>
 
@@ -155,7 +155,7 @@
       >
         <div class="toast-header">
           <i class="fa-solid fa-cart-shopping"></i>
-          <strong class="me-auto">ToDoSuper</strong>
+          <strong class="me-auto"> ToDoSuper</strong>
           <small id="tiempoToast">En este momento</small>
           <button
             type="button"
@@ -173,7 +173,7 @@
     <!-- Full screen modal -->
     <div class="modal-dialog modal-fullscreen-sm-down"></div>
 
-    <!-- Modal -->
+    <!-- Modal Agregar productos -->
     <div
       class="modal fade"
       id="exampleModal"
@@ -194,176 +194,270 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary btn-lg dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                id="dropDownIcons"
-              >
-                <i class="fa-solid fa-kitchen-set"></i> Elegí el tipo de
-                producto
-              </button>
-              <ul class="dropdown-menu" id="dropDownLista">
-                <li>
+          <div class="modal-body d-flex flex-column align-items-center">
+            <form
+              action="#"
+              id="formAdd"
+              class="needs-validation formNuevoProducto"
+              novalidate
+            >
+              <div class="titulo">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Escribí el nombre del producto*"
+                  aria-label="default input example"
+                  id="tituloDelUsuario"
+                  required
+                />
+              </div>
+              <div class="dropdown">
+                <button
+                  class="btn btn-lg dropdown-toggle btnDropDown btn-warning btn-personalizado"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  id="dropDownIcons"
+                >
                   <a
-                    class="dropdown-item"
                     href="#"
-                    id="opcion1"
-                    onClick="guardarValorClickeado(this.id)"
-                  >
-                    <i class="fa-solid fa-apple-whole"></i> Frutas
+                    id="opcionDefault"
+                    name="opcionDefault"
+                    class="dropdown-item"
+                    ><i class="fa-solid fa-kitchen-set"></i>
+                    <span id="textoIcono"> Elegí el tipo de producto*</span>
                   </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    id="opcion2"
-                    onClick="guardarValorClickeado(this.id)"
-                  >
-                    <i class="fa-solid fa-spray-can-sparkles"></i> Perfumeria
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion3"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-bandage"></i> Farmacia
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion4"
-                    onClick="guardarValorClickeado(this.id)"
-                  >
-                    <i class="fa-solid fa-screwdriver"></i> Herramientas</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion5"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-bath"></i> Higiene</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion6"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-bone"></i> Mascotas</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion7"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-bottle-water"></i> Bebidas</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion8"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-brush"></i> Pintura</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion9"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-utensils"></i> Bazar</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion10"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-carrot"></i> Verduras</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion11"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-desktop"></i> Tecnología</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion12"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-dice-d20"></i> Juegos de mesa</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion13"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-stapler"></i> Libreria</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion14"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-trowel"></i> Jardineria</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    id="opcion15"
-                    onClick="guardarValorClickeado(this.id)"
-                    ><i class="fa-solid fa-campground"></i> Camping</a
-                  >
-                </li>
-              </ul>
-            </div>
+                </button>
+                <ul class="dropdown-menu" id="dropDownLista">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion1"
+                      name="opcion1"
+                      onClick="guardarValorClickeado(this.id)"
+                    >
+                      <i class="fa-solid fa-apple-whole"></i>
+                      <span id="textoIcono"> Frutas</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      id="opcion2"
+                      name="opcion2"
+                      onClick="guardarValorClickeado(this.id)"
+                    >
+                      <i class="fa-solid fa-spray-can-sparkles"></i>
+                      <span id="textoIcono"> Perfumeria</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion3"
+                      name="opcion3"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-bandage"></i>
+                      <span id="textoIcono"> Farmacia</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion4"
+                      name="opcion4"
+                      onClick="guardarValorClickeado(this.id)"
+                    >
+                      <i class="fa-solid fa-screwdriver"></i>
+                      <span id="textoIcono"> Herramientas</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion5"
+                      name="opcion5"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-bath"></i>
+                      <span id="textoIcono"> Higiene</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion6"
+                      name="opcion6"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-bone"></i>
+                      <span id="textoIcono"> Mascotas</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion7"
+                      name="opcion7"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-bottle-water"></i>
+                      <span id="textoIcono"> Bebidas</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion8"
+                      name="opcion8"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-brush"></i>
+                      <span id="textoIcono"> Pintura</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion9"
+                      name="opcion9"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-utensils"></i>
+                      <span id="textoIcono"> Bazar</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion10"
+                      name="opcion10"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-carrot"></i>
+                      <span id="textoIcono"> Verduras</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion11"
+                      name="opcion11"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-desktop"></i>
+                      <span id="textoIcono"> Tecnología</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion12"
+                      name="opcion12"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-dice-d20"></i>
+                      <span id="textoIcono"> Juegos de mesa</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion13"
+                      name="opcion13"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-stapler"></i>
+                      <span id="textoIcono"> Libreria</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion14"
+                      name="opcion14"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-trowel"></i>
+                      <span id="textoIcono"> Jardineria</span></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcion15"
+                      name="opcion15"
+                      onClick="guardarValorClickeado(this.id)"
+                      ><i class="fa-solid fa-campground"></i>
+                      <span id="textoIcono"> Camping</span></a
+                    >
+                  </li>
+                  <li class="noSeVe">
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      id="opcionBase"
+                      name="opcionBaseName"
+                    >
+                      <i class="fa-solid fa-kitchen-set"></i>
+                      <span id="textoIcono"> Elegí el tipo de producto*</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="descripcion">
+                <div class="mb-3">
+                  <textarea
+                    class="form-control"
+                    id="descripcionDelUsuario"
+                    rows="5"
+                    placeholder="Dejate algún detalle que necesites recordar."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button
+                  type="submit"
+                  class="btn btn-warning btn-personalizado btnAgregar"
+                  id="btnAgregarProductoALista"
+                  data-bs-dismiss="modal"
+                >
+                  Agregar
+                </button>
+              </div>
+            </form>
           </div>
-          <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detalle productos -->
+    <div
+      class="modal fade"
+      id="modalDetalleProductos"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Detalle de producto
+            </h5>
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn-close"
               data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              id="liveToastBtn"
-              data-bs-dismiss="modal"
-            >
-              Agregar
-            </button>
+              aria-label="Close"
+            ></button>
           </div>
+          <div class="modal-body">...</div>
         </div>
       </div>
     </div>
@@ -372,7 +466,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10">
-            <p>esto es un copy re piola - 2022</p>
+            <p>SoloLoki/Rober - 2022</p>
           </div>
           <div class="col-md-2"><p>rrss</p></div>
         </div>

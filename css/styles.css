@@ -1,27 +1,232 @@
 body {
-  background-color: rgb(19, 19, 66);
+  font-family: "Poppins", sans-serif;
+  background-color: var(--colorPrimario);
 }
 
+.seVe {
+  display: block;
+}
+
+.noSeVe {
+  display: none;
+}
+
+:root {
+  --colorPrimario: #131342;
+  --colorSecunario: #4949f5;
+  --colorDetalles: #ffc107;
+  --colorTextoBlanco: #f7f7f7;
+  --colorTextoNegro: #1f1f1f;
+  --colorDeshabilitado: #b9b9b948;
+}
+/*----------------------HEADER---------------------------------*/
 header {
-  color: white;
-  background-color: rgb(73, 73, 245);
+  color: var(--colorTextoBlanco);
+  background-color: var(--colorSecunario);
+  height: 80px;
 }
 
-.pantalla {
-  height: 90vh;
+header .fa-cart-shopping {
+  font-size: 0.9em;
+  margin-right: 10px;
 }
 
-.btn .btn-warning .btn-personalizado {
+/*----------------------CONTENEDOR GENERAL---------------------------------*/
+.contenedorGeneral {
+  height: calc(100vh - 160px);
+}
+
+/*----------------------BOTON [+]---------------------------------*/
+
+.position-relative .float-end .btn-personalizado {
   max-height: 10%;
+  --bs-btn-bg: none;
+  z-index: 1;
+}
+.btn-personalizado {
+  color: var(--colorPrimario);
+  background-color: var(--colorDetalles);
+}
+.btn-personalizado:hover {
+  color: var(--colorTextoBlanco);
+  background-color: var(--colorSecunario);
+  border: var(--colorTextoBlanco) solid 1px;
 }
 
-footer {
-  color: white;
-  background-color: rgb(73, 73, 245);
-  text-align: center;
+.position-fixed {
+  margin-top: 250px;
+  margin-right: 12px;
+  position: fixed;
 }
+.btnAbrirPopup,
+.fa-circle-plus {
+  font-size: 2.5em !important;
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-focus-shadow-rgb: none;
+  color: var(--colorDetalles);
+  border: none;
+  background-color: transparent;
+}
+.btnAbrirPopup:hover,
+.fa-circle-plus:hover {
+  font-size: 2.5em !important;
+  color: var(--colorSecunario);
+  --bs-btn-active-bg: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-focus-shadow-rgb: none;
+  border: none;
+  background-color: transparent;
+}
+/*----------------------MODAL AGREGAR NUEVO PRODUCTO---------------------------------*/
+.modal-content {
+  background-color: var(--colorPrimario);
+  color: var(--colorTextoBlanco);
+}
+.modal-content .modal-header {
+  background-color: var(--colorSecunario);
+  color: var(--colorTextoBlanco);
+}
+
+.formNuevoProducto {
+  margin-top: 100px;
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+}
+.titulo {
+  margin-bottom: 50px;
+}
+
+.dropdown {
+  margin-bottom: 50px;
+}
+.btnDropDown {
+  width: 100%;
+}
+
+.btnAgregar {
+  width: 100%;
+}
+
+.dropdown-menu {
+  width: 100%;
+  background-color: var(--colorDetalles);
+  --bs-dropdown-link-hover-bg: var(--colorTextoBlanco);
+}
+.dropdown-item {
+  color: var(--colorTextoNegro);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--colorSecunario);
+}
+
+.dropdown-menu ul li:hover {
+  background-color: var(--colorTextoBlanco);
+}
+
+/*----------------------CONTENIDO LISTA SIN ITEMS---------------------------------*/
 
 .fa-solid,
 .fas {
   font-size: 1.5em;
+}
+.center {
+  text-align: center;
+}
+.listaVacia h2 {
+  color: var(--colorDeshabilitado);
+  margin-top: 50px;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.listaVacia .quotes {
+  color: var(--colorDeshabilitado);
+  margin-top: 50px;
+  font-size: 4em;
+}
+
+.listaVacia .caraBase {
+  color: var(--colorDeshabilitado);
+  margin-top: 50px;
+  font-size: 8em;
+}
+
+.listaVacia h5 {
+  color: var(--colorDeshabilitado);
+  margin-top: 50px;
+  font-size: 1em;
+}
+
+/*----------------------CONTENIDO LISTA ITEMS AGREGADOS JS---------------------------------*/
+.dropdown-toggle::after {
+  display: none;
+}
+.visibilitiHidden {
+  display: none;
+}
+
+.listaConItems {
+  margin-top: 50px;
+}
+.itemLista .iconoItemLista {
+  font-size: 2.5em;
+  margin-right: 15px;
+}
+
+.itemDeLista {
+  padding-right: 15px;
+  font-size: 2em;
+  margin-right: 15px;
+}
+.fa-circle-chevron-right {
+  color: var(--colorDetalles);
+}
+
+.listaConItems .fa-solid {
+  color: var(--colorTextoBlanco);
+}
+
+.listaConItems .list-group-item {
+  background-color: var(--colorSecunario);
+  color: var(--colorTextoBlanco);
+  --bs-list-group-border-color: rgb(255 255 255 / 23%);
+}
+
+.listaConItems .fa-circle-chevron-right {
+  color: var(--colorDetalles);
+}
+
+/*----------------------TOAST - CARTEL DE ESTADO---------------------------------*/
+.toast-header .fa-cart-shopping {
+  font-size: 1em;
+  margin-right: 5px;
+}
+
+/*----------------------FOOTER---------------------------------*/
+
+footer {
+  color: var(--colorTextoBlanco);
+  background-color: var(--colorSecunario);
+  text-align: center;
+  height: 80px;
+}
+
+/*----------------------MEDIAQUERYS---------------------------------*/
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .listaVacia .quotes {
+    margin-top: 20px;
+    font-size: 2em;
+  }
+  .listaVacia h2 {
+    margin-top: 10px;
+    font-size: 2em;
+  }
+  .listaVacia .caraBase {
+    font-size: 5em;
+  }
 }
