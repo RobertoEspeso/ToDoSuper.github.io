@@ -54,7 +54,7 @@ header .fa-cart-shopping {
 }
 
 .position-fixed {
-  margin-top: 250px;
+  margin-top: 200px;
   margin-right: 12px;
   position: fixed;
 }
@@ -90,7 +90,7 @@ header .fa-cart-shopping {
 
 .formNuevoProducto {
   margin-top: 100px;
-  width: 310px;
+  width: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -103,6 +103,9 @@ header .fa-cart-shopping {
 }
 .btnDropDown {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btnAgregar {
@@ -116,6 +119,8 @@ header .fa-cart-shopping {
 }
 .dropdown-item {
   color: var(--colorTextoNegro);
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-item.active,
@@ -125,6 +130,24 @@ header .fa-cart-shopping {
 
 .dropdown-menu ul li:hover {
   background-color: var(--colorTextoBlanco);
+}
+
+.iconosFormateados {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.itemDeLista .iconosFormateados {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 60px;
+  margin-right: 10px;
 }
 
 /*----------------------CONTENIDO LISTA SIN ITEMS---------------------------------*/
@@ -207,6 +230,7 @@ header .fa-cart-shopping {
   overflow: hidden;
 }
 .contenedorTextoDeLista {
+  margin-left: 10px;
   width: 70%;
   word-wrap: break-word;
 }
@@ -270,6 +294,17 @@ footer .row {
   .listaVacia .caraBase {
     font-size: 5em;
   }
+
+  button span {
+    font-size: 0.8em;
+  }
+  li a span {
+    font-size: 0.8em;
+  }
+  .formNuevoProducto {
+    width: 290px;
+  }
+
   footer .row {
     padding: 0;
   }
@@ -294,6 +329,11 @@ footer .row {
   .listaVacia .caraBase {
     font-size: 5em;
   }
+
+  .formNuevoProducto {
+    width: 380px;
+  }
+
   footer .row {
     padding: 1.5em 0;
   }
